@@ -10,7 +10,9 @@ class RouterGenerator {
         return _goToRoute(const Home(), Routes.home);
 
       case Routes.configs:
-        return _goToRoute(Config(), Routes.configs);
+        return _goToRoute(const Config(), Routes.configs);
+      case Routes.ingredients:
+        return _goToRoute(const IngredientsPage(), Routes.ingredients);
       default:
         return _goToRoute(SigninPage(), Routes.signin);
     }
