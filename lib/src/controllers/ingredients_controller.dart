@@ -2,12 +2,12 @@ import '../../libraries/models.dart';
 import '../../libraries/utils.dart';
 
 class IngredientsController {
-  static final bloc = StreamController<ApiRes<List<Ingredients?>>?>.broadcast();
+  static final bloc = StreamController<ApiRes<List<Ingredients?>>>.broadcast();
 
-  static Future<void> load({bool? clearValues = true}) async {
-    if (clearValues!) {
-      bloc.add(null);
-    }
+  static Future<void> load() async {
+    // if (clearValues!) {
+    //   bloc.add(null);
+    // }
     bloc.add(await findAll());
   }
 

@@ -6,6 +6,8 @@ class Ingredients {
   num? quantityInPackage;
   num? cost;
 
+  Ingredients({this.id, this.name, this.storeCode, this.unitOfMeasurement, this.quantityInPackage, this.cost,});
+
   Ingredients.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     name = json['name'];

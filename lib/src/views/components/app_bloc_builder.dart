@@ -4,14 +4,14 @@ import '../../../libraries/views.dart';
 
 class AppBlocBuilder<T> extends StatelessWidget {
 
-  final StreamController<ApiRes<T>> bloc;
+  final StreamController<ApiRes<T?>> bloc;
   final Widget Function(T?) child;
 
   const AppBlocBuilder({super.key, required this.bloc, required this.child});
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<ApiRes<T>>(
+    return StreamBuilder(
       stream: bloc.stream,
       builder: (context, AsyncSnapshot<ApiRes<T?>?> snapshot) {
         if (!snapshot.hasData) {

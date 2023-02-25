@@ -44,7 +44,7 @@ class AppDrawer extends StatelessWidget {
               label: 'Receitas',
               subtitle: 'Criação de receitas'),
           menuItems(
-              onTap: () {},
+              onTap: () => Get.toNamed(Routes.ingredients),
               leading: const Icon(Icons.label),
               label: 'Ingredientes',
               subtitle: 'Criação de ingredientes para as receitas'),
