@@ -19,11 +19,11 @@ class IngredientsController {
     return req;
   }
 
-  static Future<ApiRes> post(Ingredients newData) async {
+  static Future<ApiRes> post(Ingredients? newData) async {
     final req = await Api.request(
         method: ApiMethods.post,
         endpoint: Endpoints.bakeryIngredients,
-        body: newData.toJson());
+        body: newData?.toJson());
     return req;
   }
 
@@ -40,12 +40,12 @@ class IngredientsController {
     return req;
   }
 
-  static Future<ApiRes<List<Ingredients?>>> delete({Ingredients? data}) async {
-    final req = await Api.request<List<Ingredients?>>(
+  static Future<ApiRes<Ingredients?>> delete({Ingredients? data}) async {
+    final req = await Api.request<Ingredients?>(
       method: ApiMethods.del,
       endpoint: Endpoints.bakeryIngredients,
       body: {"_id": data?.id},
-      function: Ingredients.toList,
+      function: Ingredients.fromJson,
     );
     return req;
   }

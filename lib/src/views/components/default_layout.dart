@@ -6,8 +6,15 @@ class DefaultPage extends StatelessWidget {
   final Widget child;
   final Widget? appBarTitle;
   final Widget? floatingAction;
-  const DefaultPage({super.key, required this.title, required this.child, this.appBarTitle, this.floatingAction});
-
+  final bool? hideAppBar;
+  const DefaultPage({
+    super.key,
+    required this.title,
+    required this.child,
+    this.appBarTitle,
+    this.floatingAction,
+    this.hideAppBar,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +22,8 @@ class DefaultPage extends StatelessWidget {
       color: Get.theme.primaryColor,
       title: title,
       child: Scaffold(
-        drawer: Get.currentRoute == Routes.signin ? null : AppDrawer(),
-        appBar: MyAppBar.build(title: appBarTitle),
+        drawer: Get.currentRoute == Routes.signin ? null : const AppDrawer(),
+        appBar: (hideAppBar ?? false) ? null : MyAppBar.build(title: appBarTitle),
         body: child,
         floatingActionButton: floatingAction,
       ),

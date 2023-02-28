@@ -1,3 +1,4 @@
+
 import '../../../libraries/controllers.dart';
 import '../../../libraries/models.dart';
 import '/libraries/utils.dart';
@@ -50,7 +51,7 @@ class _ConfigState extends State<Config> {
                   SizedBox(
                       height: Get.height * 0.25,
                       child: Image.asset('${app.staticFolder}/finance.jpg')),
-                  input(
+                  NumberField(
                     'Dias de trabalho por mês',
                     controller: confForm.dayOfWorkPerMonth,
                     focus: confForm.daysFcs,
@@ -58,7 +59,7 @@ class _ConfigState extends State<Config> {
                     validator: defaultValidator,
                     onFieldSubmitted: (_) => confForm.hoursFcs.requestFocus()
                   ),
-                  input(
+                  NumberField(
                     'Horas de trabalho por dia',
                     controller: confForm.hoursOfWorkPerDay,
                     focus: confForm.hoursFcs,
@@ -67,7 +68,7 @@ class _ConfigState extends State<Config> {
                     onFieldSubmitted: (_) => confForm.gainFcs.requestFocus()
                     
                   ),
-                  input(
+                  NumberField(
                     'Meta de ganho mensal',
                     controller: confForm.averageGain,
                     focus: confForm.gainFcs,
@@ -100,39 +101,6 @@ class _ConfigState extends State<Config> {
           ),
         );
       },
-    );
-  }
-
-  Widget input(
-    String label, {
-    FocusNode? focus,
-    required TextEditingController controller,
-    TextInputType? inputType,
-    Widget? subtitle,
-    String? Function(String?)? validator,
-    void Function(String)? onFieldSubmitted,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: ListTile(
-        title: Text(
-          label,
-          style: Get.textTheme.bodyMedium,
-        ),
-        subtitle: subtitle,
-        trailing: SizedBox(
-          width: Get.width * 0.3,
-          child: TextFormField(
-            onFieldSubmitted: onFieldSubmitted,
-            validator: validator,
-            decoration: const InputDecoration(filled: true),
-            controller: controller,
-            focusNode: focus,
-            keyboardType: inputType,
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
     );
   }
 

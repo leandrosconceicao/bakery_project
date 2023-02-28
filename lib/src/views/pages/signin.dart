@@ -12,6 +12,7 @@ class SigninPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultPage(
       title: 'Signin',
+      hideAppBar: true,
       appBarTitle: const Text('Faça seu login'),
       child: _body(),
     );
