@@ -7,6 +7,8 @@ export '../src/views/components/app_drawer.dart';
 export '../src/views/components/app_bloc_builder.dart';
 export '../src/views/components/loading_warning.dart';
 export  '../src/views/components/ingredient_manager.dart';
+export '../src/views/components/option_button.dart';
+export '../src/views/components/number_input_field.dart';
 export '../src/views/pages/home.dart';
 export '../src/views/pages/signin.dart';
 export '../src/views/pages/configs.dart';
