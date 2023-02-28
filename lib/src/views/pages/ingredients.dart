@@ -8,7 +8,7 @@ import '/libraries/views.dart';
 class IngredientsPage extends StatelessWidget {
   const IngredientsPage({super.key});
 
-   @override
+  @override
   Widget build(BuildContext context) {
     IngredientsController.load();
     return DefaultPage(
@@ -23,50 +23,131 @@ class IngredientsPage extends StatelessWidget {
   }
 
   Widget _body() {
-    return Column(children: [
-      Expanded(child: AppBlocBuilder<List<Ingredients?>>(bloc: IngredientsController.bloc, child: itemsList)),
-      SizedBox(
-        height: 20,
-      ),
-    ],);
+    return Column(
+      children: [
+        Expanded(
+            child: AppBlocBuilder<List<Ingredients?>>(
+                bloc: IngredientsController.bloc, child: itemsList)),
+        SizedBox(
+          height: 20,
+        ),
+      ],
+    );
   }
 
-  void manageItem({bool isEdit=false}) {
-    Get.dialog(WillPopScope(
-      onWillPop: () async => false,
-      child: AlertDialog(
-        scrollable: true,
-        title: Text(isEdit ? 'Editar item' : 'Adicionar item'),
-        content: IngredientManager(isEdit: isEdit),
-        actions: [
-          LoadingButton(label: const Text('Salvar'), process: () {}),
-          TextButton(onPressed: () => Get.back(), child: const Text('Cancelar'))
-        ],
-      ),
-    ), barrierDismissible: false);
+  void manageItem({bool isEdit = false, Ingredients? data}) {
+    Get.dialog(
+        WillPopScope(
+          onWillPop: () async => false,
+          child: AlertDialog(
+            title: Text(isEdit ? 'Editar item' : 'Adicionar item'),
+            content: IngredientManager(isEdit: isEdit, data: data),
+            actions: [
+              LoadingButton(
+                label: const Text('Salvar'),
+                process: () {
+                  if (isEdit) {
+                    editItem(data: data);
+                  } else {
+                    saveItem();
+                  }
+                },
+              ),
+              TextButton(
+                  onPressed: () => Get.back(), child: const Text('Cancelar'))
+            ],
+          ),
+        ),
+        barrierDismissible: false);
   }
 
   Widget itemsList(List<Ingredients?>? data) {
     if (data?.isEmpty ?? true) {
-      return Center(child: Text('Nenhum item cadastrado no momento', style: Get.textTheme.headlineMedium, textAlign: TextAlign.center,));
+      return Center(
+          child: Text(
+        'Nenhum item cadastrado no momento',
+        style: Get.textTheme.headlineMedium,
+        textAlign: TextAlign.center,
+      ));
     }
     return ListView.builder(
       itemCount: data?.length ?? 0,
       itemBuilder: (context, int i) {
         final item = data?[i];
+        final func = Functions(number: item?.cost);
         return ListTile(
+          leading: const Icon(Icons.label, size: 40,),
+          subtitle: Text('${func.getMoney()}'),
           title: Text(item?.name ?? ''),
+          trailing: OptionsButton(
+            icon: const Icon(Icons.settings),
+            actionsData: [
+              ActionsData(value: ActionTypes.edit, title: 'Editar'),
+              ActionsData(value: ActionTypes.del, title: 'Excluir'),
+            ],
+            onSelected: (value) {
+              switch (value) {
+                case ActionTypes.edit:
+                  manageItem(isEdit: true, data: item);
+                  break;
+                case ActionTypes.del:
+                  delItem(data: item);
+                  break;
+                default:
+                  break;
+              }
+            },
+          ),
         );
       },
     );
   }
 
   Future<void> saveItem() async {
-    final req = await IngredientsController.post(Ingredients(
+    final req = await IngredientsController.post(
+      Ingredients(
+          cost: ingreForm.getCost(),
+          name: ingreForm.getName(),
+          quantityInPackage: ingreForm.getQtdPkg(),
+          unitOfMeasurement: ingreForm.getUnit(),
+          storeCode: app.storeCode),
+    );
+    if (!req.result) {
+      Get.defaultDialog(title: 'Atenção', middleText: req.message);
+    } else {
+      Get.back();
+      IngredientsController.load();
+    }
+  }
+
+  Future<void> editItem({Ingredients? data}) async {
+    final req = await IngredientsController.update(id: data?.id ?? '', data: Ingredients(
       cost: ingreForm.getCost(),
       name: ingreForm.getName(),
       quantityInPackage: ingreForm.getQtdPkg(),
       unitOfMeasurement: ingreForm.getUnit(),
+      storeCode: app.storeCode
     ));
+    if (!req.result) {
+      Get.defaultDialog(title: 'Atenção', middleText: req.message);
+    } else {
+      Get.back();
+      IngredientsController.load();
+    }
+  }
+  
+  Future<void> delItem({Ingredients? data}) async {
+    final req = await IngredientsController.delete(data: data);
+    if (!req.result) {
+      Get.defaultDialog(title: 'Atenção', middleText: req.message);
+    } else {
+      Get.rawSnackbar(message: 'Item foi excluido com sucesso, caso queira restaurar clique aqui.', onTap: (_) async {
+        final r = await IngredientsController.post(req.data); 
+        if (!r.result) {
+          Get.defaultDialog(title: 'Atenção', middleText: r.message);
+        }
+      });
+      IngredientsController.load();
+    }
   }
 }
