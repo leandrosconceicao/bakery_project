@@ -3,4 +3,5 @@ class Routes {
   static const configs = '/configs';
   static const signin = '/sign_in';
   static const ingredients = '/ingredients';
+  static const receipt = '/receipt';
 }

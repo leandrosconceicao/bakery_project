@@ -1,4 +1,5 @@
 import '../../../libraries/models.dart';
+import '../../../libraries/utils.dart';
 import '../../../libraries/views.dart';
 
 class RouterGenerator {
@@ -10,11 +11,21 @@ class RouterGenerator {
         return _goToRoute(const Home(), Routes.home);
 
       case Routes.configs:
-        return _goToRoute(const Config(), Routes.configs);
+        const r = Routes.configs;
+        app.setRoute(r);
+        return _goToRoute(const Config(), r);
       case Routes.ingredients:
-        return _goToRoute(const IngredientsPage(), Routes.ingredients);
+        const r = Routes.ingredients;
+        app.setRoute(r);
+        return _goToRoute(const IngredientsPage(), r);
+      case Routes.receipt:
+        const r = Routes.receipt;
+        app.setRoute(r);
+        return _goToRoute(const ReceiptPage(), r);
       default:
-        return _goToRoute(SigninPage(), Routes.signin);
+        const r = Routes.signin;
+        app.setRoute(r);
+        return _goToRoute(SigninPage(), r);
     }
   }
 
