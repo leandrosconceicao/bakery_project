@@ -1,11 +1,11 @@
 import '../../libraries/models.dart';
 
-class Recipes extends DefaultDatabaseInfo {
+class Receipts extends DefaultDatabaseInfo {
   String? name;
   DateTime? createdAt;
   List<Ingredients?>? ingredients;
 
-  Recipes({
+  Receipts({
     this.name,
     this.createdAt,
     this.ingredients,
@@ -13,7 +13,7 @@ class Recipes extends DefaultDatabaseInfo {
     required String id,
   }) : super(id: id, storeCode: storeCode);
 
-  Recipes.fromJson(Map<String, dynamic> json)
+  Receipts.fromJson(Map<String, dynamic> json)
   : name = json['name'],
     createdAt = json['createdAt'],
     ingredients = Ingredients.toList(json['ingredients']),
@@ -28,11 +28,11 @@ class Recipes extends DefaultDatabaseInfo {
     };
   }
 
-  static List<Recipes?> toList(List? json) {
+  static List<Receipts?> toList(List? json) {
     if (json == null) {
       return [];
     }
-    return json.map((e) => Recipes.fromJson(e)).toList();
+    return json.map((e) => Receipts.fromJson(e)).toList();
   }
 }
 
