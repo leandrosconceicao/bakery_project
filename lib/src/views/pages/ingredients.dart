@@ -8,16 +8,18 @@ import '/libraries/views.dart';
 class IngredientsPage extends StatelessWidget {
   const IngredientsPage({super.key});
 
+  final title = 'Ingredientes';
+
   @override
   Widget build(BuildContext context) {
     IngredientsController.load();
     return DefaultPage(
-      title: 'Ingredientes',
-      appBarTitle: const Text('Ingredientes'),
-      floatingAction: FloatingActionButton(
-        onPressed: () => manageItem(),
-        child: const Icon(Icons.add),
-      ),
+      title: title,
+      appBarTitle: Text(title),
+      // floatingAction: FloatingActionButton(
+      //   onPressed: () => manageItem(),
+      //   child: const Icon(Icons.add),
+      // ),
       child: _body(),
     );
   }
@@ -28,8 +30,9 @@ class IngredientsPage extends StatelessWidget {
         Expanded(
             child: AppBlocBuilder<List<Ingredients?>>(
                 bloc: IngredientsController.bloc, child: itemsList)),
+        FloatingActionButton(onPressed: () => manageItem(), child: Icon(Icons.add, color: Colors.white,),),
         SizedBox(
-          height: 20,
+          height: Get.height * 0.1,
         ),
       ],
     );

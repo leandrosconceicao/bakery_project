@@ -7,13 +7,14 @@ class SigninPage extends StatelessWidget {
   SigninPage({super.key});
 
   final btnFocus = FocusNode();
+  final title = 'Faça seu login';
 
   @override
   Widget build(BuildContext context) {
     return DefaultPage(
-      title: 'Signin',
+      title: title,
       hideAppBar: true,
-      appBarTitle: const Text('Faça seu login'),
+      appBarTitle: Text(title),
       child: _body(),
     );
   }

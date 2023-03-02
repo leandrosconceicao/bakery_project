@@ -84,7 +84,7 @@ class _ConfigState extends State<Config> {
                     height: Get.height * 0.04,
                   ),
                   SizedBox(
-                    width: Get.width,
+                    width: Get.width * 0.94,
                     height: Get.height * 0.05,
                     child: LoadingButton(
                       focus: confForm.btnFcs,
@@ -95,6 +95,7 @@ class _ConfigState extends State<Config> {
                       process: saveFunc,
                     ),
                   ),
+                  SizedBox(height: Get.height * 0.02,)
                 ],
               ),
             ),
