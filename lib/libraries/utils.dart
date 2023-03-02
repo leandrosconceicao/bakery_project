@@ -5,6 +5,7 @@ export '../src/utils/app_controller.dart';
 export '../src/utils/forms/authentication_form.dart';
 export '../src/utils/forms/configuration_form.dart';
 export '../src/utils/forms/ingredients_form.dart';
+export '../src/utils/forms/receipt_form.dart';
 export '../src/utils/router/router.dart';
 export 'dart:async';
 export 'dart:convert';

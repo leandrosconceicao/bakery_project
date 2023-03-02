@@ -13,6 +13,7 @@ export '../src/views/pages/home.dart';
 export '../src/views/pages/signin.dart';
 export '../src/views/pages/configs.dart';
 export '../src/views/pages/ingredients.dart';
+export '../src/views/pages/receipt.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:get/get.dart';
