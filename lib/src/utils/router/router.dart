@@ -22,6 +22,10 @@ class RouterGenerator {
         const r = Routes.receipt;
         app.setRoute(r);
         return _goToRoute(const ReceiptPage(), r);
+      case Routes.expenses:
+        const r = Routes.expenses;
+        app.setRoute(r);
+        return _goToRoute(const ExpensesView(), r);
       default:
         const r = Routes.signin;
         app.setRoute(r);
