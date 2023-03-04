@@ -66,12 +66,7 @@ class IngredientsPage extends StatelessWidget {
 
   Widget itemsList(List<Ingredients?>? data) {
     if (data?.isEmpty ?? true) {
-      return Center(
-          child: Text(
-        'Nenhum item cadastrado no momento',
-        style: Get.textTheme.headlineMedium,
-        textAlign: TextAlign.center,
-      ));
+      return const NotFoundWarning();
     }
     return ListView.builder(
       itemCount: data?.length ?? 0,

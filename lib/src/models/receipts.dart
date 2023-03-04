@@ -10,12 +10,12 @@ class Receipts extends DefaultDatabaseInfo {
     this.createdAt,
     this.ingredients,
     required String storeCode,
-    required String id,
+    String? id,
   }) : super(id: id, storeCode: storeCode);
 
   Receipts.fromJson(Map<String, dynamic> json)
   : name = json['name'],
-    createdAt = json['createdAt'],
+    createdAt = DateTime.tryParse(json['createdAt']),
     ingredients = Ingredients.toList(json['ingredients']),
     super(id: json['_id'], storeCode:  json['storeCode']);
 
@@ -23,7 +23,6 @@ class Receipts extends DefaultDatabaseInfo {
     return {
       "storeCode": storeCode,
       "name": name,
-      "createdAt": createdAt,
       "ingredients": ingredients?.map((e) => e?.toJson()).toList()
     };
   }

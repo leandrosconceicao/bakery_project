@@ -1,21 +1,32 @@
-class Ingredients {
-  String? id;
+import 'package:bakery/libraries/models.dart';
+
+class Ingredients extends DefaultDatabaseInfo {
   String? name;
-  String? storeCode;
   String? unitOfMeasurement;
   num? quantityInPackage;
   num? cost;
 
-  Ingredients({this.id, this.name, this.storeCode, this.unitOfMeasurement, this.quantityInPackage, this.cost,});
+  Ingredients({
+    String? id,
+    this.name,
+    String? storeCode,
+    this.unitOfMeasurement,
+    this.quantityInPackage,
+    this.cost,
+  }) : super(
+          id: id,
+          storeCode: storeCode,
+        );
 
-  Ingredients.fromJson(Map<String, dynamic> json) {
-    id = json['_id'];
-    name = json['name'];
-    storeCode = json['storeCode'];
-    unitOfMeasurement = json['unitOfMeasurement'];
-    quantityInPackage = json['quantInPackage'];
-    cost = json['cost'];
-  }
+  Ingredients.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        unitOfMeasurement = json['unitOfMeasurement'],
+        quantityInPackage = json['quantInPackage'],
+        cost = json['cost'],
+        super(
+          id: json['_id'],
+          storeCode: json['storeCode'],
+        );
 
   Map<String, dynamic> toJson() {
     return {

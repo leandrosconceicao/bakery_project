@@ -60,6 +60,7 @@ class DefaultPage extends StatelessWidget {
                           menuItem(func: () => Get.toNamed(Routes.home), icon: Icons.home, route: Routes.home),
                           menuItem(func: () => Get.toNamed(Routes.ingredients), icon: Icons.label, route: Routes.ingredients),
                           menuItem(func: () => Get.toNamed(Routes.receipt), icon: Icons.receipt_long, route: Routes.receipt),
+                          menuItem(func: () => Get.toNamed(Routes.expenses), icon: Icons.bar_chart_rounded, route: Routes.expenses),
                           menuItem(func: () => Get.toNamed(Routes.configs), icon: Icons.settings, route: Routes.configs),
                         ],
                       ),
@@ -83,9 +84,11 @@ class DefaultPage extends StatelessWidget {
   }) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: GestureDetector(
-        onTap: func,
-        child: Icon(icon, color: app.isActiveRoute(route) ? Colors.white : Colors.grey, size: app.isActiveRoute(route) ? (Get.height * 0.04) : (Get.height * 0.035),)),
+      child: Ink(
+        child: InkWell(
+          onTap: func,
+          child: Icon(icon, color: app.isActiveRoute(route) ? Colors.white : Colors.black26, size: app.isActiveRoute(route) ? (Get.height * 0.04) : (Get.height * 0.035),)),
+      ),
     );
   }
 }

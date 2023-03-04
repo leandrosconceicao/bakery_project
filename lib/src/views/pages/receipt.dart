@@ -1,7 +1,5 @@
 import 'package:bakery/libraries/utils.dart';
-
 import '/libraries/controllers.dart';
-
 import '../../../libraries/models.dart';
 import '/libraries/views.dart';
 
@@ -21,7 +19,6 @@ class _ReceiptPageState extends State<ReceiptPage>
 
   @override
   Widget build(BuildContext context) {
-    ReceiptsController.load();
     return DefaultPage(
       title: title,
       appBarTitle: Text(title),
@@ -35,6 +32,7 @@ class _ReceiptPageState extends State<ReceiptPage>
 
   Widget _body() {
     return TabBarView(
+      controller: tab,
       physics: const NeverScrollableScrollPhysics(),
       children: [
         Column(
@@ -54,18 +52,14 @@ class _ReceiptPageState extends State<ReceiptPage>
             ),
           ],
         ),
+        ReceiptManager(tabController: tab,)
       ]
     );
   }
 
   Widget itemsList(List<Receipts?>? data) {
     if (data?.isEmpty ?? true) {
-      return Center(
-          child: Text(
-        'Nenhum item cadastrado no momento',
-        style: Get.textTheme.headlineMedium,
-        textAlign: TextAlign.center,
-      ));
+      return const NotFoundWarning();
     }
     return ListView.builder(
       itemCount: data?.length ?? 0,
@@ -176,6 +170,7 @@ class _ReceiptPageState extends State<ReceiptPage>
         milliseconds: 500,
       ),
     );
+    ReceiptsController.load();
     super.initState();
   }
 }
