@@ -12,6 +12,7 @@ class Ingredients extends DefaultDatabaseInfo {
     this.selected,
     String? id,
     this.name,
+    DateTime? createdAt,
     String? storeCode,
     this.unitOfMeasurement,
     this.quantityInPackage,
@@ -19,6 +20,7 @@ class Ingredients extends DefaultDatabaseInfo {
   }) : super(
           id: id,
           storeCode: storeCode,
+          createdAt: createdAt,
         );
 
   Ingredients.fromJson(Map<String, dynamic> json)
@@ -31,6 +33,7 @@ class Ingredients extends DefaultDatabaseInfo {
         super(
           id: json['_id'],
           storeCode: json['storeCode'],
+          createdAt: DateTime.tryParse(json['createdAt']),
         );
 
   Map<String, dynamic> toJson() {

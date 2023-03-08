@@ -8,6 +8,7 @@ export '../src/models/api_response.dart';
 export '../src/models/configs.dart';
 export '../src/models/ingredients.dart';
 export '../src/models/receipts.dart';
+export '../src/models/expanses.dart';
 export '../src/models/default_database_info.dart';
 export '../src/models/user.dart';
 export '../src/models/establishments.dart';

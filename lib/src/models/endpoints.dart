@@ -3,4 +3,5 @@ class Endpoints {
   static const bakeryIngredients = '/bakery/ingredients';
   static const bakeryRecipes = '/bakery/recipes';
   static const authentication = '/authentication';
+  static const expanses = '/bakery/expanses';
 }
