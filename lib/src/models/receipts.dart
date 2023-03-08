@@ -27,6 +27,8 @@ class Receipts extends DefaultDatabaseInfo {
     };
   }
 
+  num? get totalCost => ingredients?.fold(0.0, (previousValue, element) => (element?.cost ?? 0.0) + (previousValue ?? 0.0));
+
   static List<Receipts?> toList(List? json) {
     if (json == null) {
       return [];
