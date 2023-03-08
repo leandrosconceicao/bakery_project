@@ -11,8 +11,6 @@ class Functions {
     return Money.fromNum(number ?? 0, code: brl.code);
   }
 
-  String formatDate() {
-    return DateFormat('dd/MM/yyyy HH:mm:ss').format(date ?? DateTime.now());
-  }
+  String get formatDate => DateFormat('dd/MM/yyyy HH:mm:ss').format(date ?? DateTime.now());
 
 }
