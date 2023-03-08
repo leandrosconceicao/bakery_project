@@ -1,12 +1,15 @@
 import 'package:bakery/libraries/models.dart';
+import 'package:bakery/libraries/views.dart';
 
 class Ingredients extends DefaultDatabaseInfo {
+  RxBool? selected;
   String? name;
   String? unitOfMeasurement;
   num? quantityInPackage;
   num? cost;
 
   Ingredients({
+    this.selected,
     String? id,
     this.name,
     String? storeCode,
@@ -19,7 +22,9 @@ class Ingredients extends DefaultDatabaseInfo {
         );
 
   Ingredients.fromJson(Map<String, dynamic> json)
-      : name = json['name'],
+      : 
+        selected = false.obs,
+        name = json['name'],
         unitOfMeasurement = json['unitOfMeasurement'],
         quantityInPackage = json['quantInPackage'],
         cost = json['cost'],
