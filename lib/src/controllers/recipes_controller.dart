@@ -28,25 +28,22 @@ class ReceiptsController {
     return req;
   }
 
-  static Future<ApiRes<List<Receipts?>>> delete({Receipts? data}) async {
-    final req = await Api.request<List<Receipts?>>(
-        method: ApiMethods.del,
-        endpoint: Endpoints.bakeryRecipes,
-        body: {"_id": data?.id},
-        function: Receipts.toList);
+  static Future<ApiRes<Receipts?>> delete({Receipts? data}) async {
+    final req = await Api.request<Receipts?>(
+      method: ApiMethods.del,
+      endpoint: Endpoints.bakeryRecipes,
+      body: {"_id": data?.id},
+      function: Receipts.fromJson,
+    );
     return req;
   }
 
   static Future<ApiRes> update({required String id, Receipts? data}) async {
-    final params = {
-        "_id": id,
-        "data": data?.toJson()
-      };
+    final params = {"_id": id, "data": data?.toJson()};
     final req = await Api.request(
-      method: ApiMethods.put,
-      endpoint: Endpoints.bakeryRecipes,
-      body: params
-    );
+        method: ApiMethods.put,
+        endpoint: Endpoints.bakeryRecipes,
+        body: params);
     return req;
   }
 }
