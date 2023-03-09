@@ -1,5 +1,7 @@
 import 'package:bakery/libraries/models.dart';
 
+import '../../libraries/utils.dart';
+
 class Expanses extends DefaultDatabaseInfo {
   String? description;
   num? value;
@@ -29,7 +31,7 @@ class Expanses extends DefaultDatabaseInfo {
     return {
       "description": description,
       "value": value,
-      "storeCode": storeCode,
+      "storeCode": app.storeCode,
     };
   }
 
