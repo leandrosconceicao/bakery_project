@@ -88,6 +88,7 @@ class ExpanseManager extends StatelessWidget {
       } else {
         Get.back();
         expansesControl.load();
+        expanseForm.clearForm();
       }
     }
   }
