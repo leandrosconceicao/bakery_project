@@ -3,8 +3,10 @@ import '../../../libraries/utils.dart';
 import '../../../libraries/views.dart';
 
 class NotFoundWarning extends StatelessWidget {
+  final String? message;
   const NotFoundWarning({
     super.key,
+    this.message,
   });
 
   @override
@@ -14,11 +16,11 @@ class NotFoundWarning extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 250,
+              height: Get.height * 0.25,
               child: Image.asset('${app.staticFolder}/not_found.png')),
               SizedBox(height: Get.height * 0.01,),
             Text(
-      'Nenhum item cadastrado no momento',
+      message ?? 'Nenhum item cadastrado no momento',
       style: Get.textTheme.headlineMedium,
       textAlign: TextAlign.center,
     ),
