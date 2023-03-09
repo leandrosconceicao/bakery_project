@@ -11,6 +11,7 @@ export '../src/views/components/not_found_warning.dart';
 export '../src/views/components/number_input_field.dart';
 export '../src/views/components/option_button.dart';
 export '../src/views/components/receipt_manager.dart';
+export '../src/views/components/expanse_manager.dart';
 export 'package:flutter/cupertino.dart' show CupertinoIcons;
 export '../src/views/pages/configs.dart';
 export '../src/views/pages/expenses.dart';
