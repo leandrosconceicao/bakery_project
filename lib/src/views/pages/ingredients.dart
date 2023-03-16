@@ -15,26 +15,22 @@ class IngredientsPage extends StatelessWidget {
     IngredientsController.load();
     return DefaultPage(
       title: title,
-      appBarTitle: Text(title),
-      // floatingAction: FloatingActionButton(
-      //   onPressed: () => manageItem(),
-      //   child: const Icon(Icons.add),
-      // ),
+      appBarTitle: Text(title, style: TextStyle(color: Colors.white)),
+      floatingAction: FloatingActionButton(
+        onPressed: () => manageItem(),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
       child: _body(),
     );
   }
 
   Widget _body() {
-    return Column(
-      children: [
-        Expanded(
-            child: AppBlocBuilder<List<Ingredients?>>(
-                bloc: IngredientsController.bloc, child: itemsList)),
-        FloatingActionButton(onPressed: () => manageItem(), child: Icon(Icons.add, color: Colors.white,),),
-        SizedBox(
-          height: Get.height * 0.1,
-        ),
-      ],
+    return AppBlocBuilder<List<Ingredients?>>(
+      bloc: IngredientsController.bloc,
+      child: itemsList,
     );
   }
 
@@ -74,7 +70,10 @@ class IngredientsPage extends StatelessWidget {
         final item = data?[i];
         final func = Functions(number: item?.cost);
         return ListTile(
-          leading: const Icon(Icons.label, size: 40,),
+          leading: const Icon(
+            Icons.label,
+            size: 40,
+          ),
           subtitle: Text('${func.getMoney()}'),
           title: Text(item?.name ?? ''),
           trailing: OptionsButton(
@@ -119,13 +118,14 @@ class IngredientsPage extends StatelessWidget {
   }
 
   Future<void> editItem({Ingredients? data}) async {
-    final req = await IngredientsController.update(id: data?.id ?? '', data: Ingredients(
-      cost: ingreForm.getCost(),
-      name: ingreForm.getName(),
-      quantityInPackage: ingreForm.getQtdPkg(),
-      unitOfMeasurement: ingreForm.getUnit(),
-      storeCode: app.storeCode
-    ));
+    final req = await IngredientsController.update(
+        id: data?.id ?? '',
+        data: Ingredients(
+            cost: ingreForm.getCost(),
+            name: ingreForm.getName(),
+            quantityInPackage: ingreForm.getQtdPkg(),
+            unitOfMeasurement: ingreForm.getUnit(),
+            storeCode: app.storeCode));
     if (!req.result) {
       Get.defaultDialog(title: 'Atenção', middleText: req.message);
     } else {
@@ -133,18 +133,21 @@ class IngredientsPage extends StatelessWidget {
       IngredientsController.load();
     }
   }
-  
+
   Future<void> delItem({Ingredients? data}) async {
     final req = await IngredientsController.delete(data: data);
     if (!req.result) {
       Get.defaultDialog(title: 'Atenção', middleText: req.message);
     } else {
-      Get.rawSnackbar(message: 'Item foi excluido com sucesso, caso queira restaurar clique aqui.', onTap: (_) async {
-        final r = await IngredientsController.post(req.data); 
-        if (!r.result) {
-          Get.defaultDialog(title: 'Atenção', middleText: r.message);
-        }
-      });
+      Get.rawSnackbar(
+          message:
+              'Item foi excluido com sucesso, caso queira restaurar clique aqui.',
+          onTap: (_) async {
+            final r = await IngredientsController.post(req.data);
+            if (!r.result) {
+              Get.defaultDialog(title: 'Atenção', middleText: r.message);
+            }
+          });
       IngredientsController.load();
     }
   }

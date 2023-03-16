@@ -14,7 +14,7 @@ class SigninPage extends StatelessWidget {
     return DefaultPage(
       title: title,
       hideAppBar: true,
-      appBarTitle: Text(title),
+      appBarTitle: Text(title, style: TextStyle(color: Colors.white)),
       child: _body(),
     );
   }
@@ -22,10 +22,9 @@ class SigninPage extends StatelessWidget {
   Widget _body() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: SingleChildScrollView(
-        padding: EdgeInsets.only(top: Get.height * 0.15),
-        child: Form(
-          key: authForm.formKey,
+      child: Form(
+        key: authForm.formKey,
+        child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

@@ -2,6 +2,7 @@ import '../../../libraries/views.dart';
 import '../../../libraries/models.dart';
 
 final appTheme = ThemeData(
+  primaryColor: Colors.white,
   scaffoldBackgroundColor: MyPallete.defaultColor.shade500,
   primarySwatch: MyPallete.defaultColor,
   floatingActionButtonTheme: FloatingActionButtonThemeData(

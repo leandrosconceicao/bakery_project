@@ -5,6 +5,7 @@ import '/libraries/views.dart';
 class MyAppBar {
   static PreferredSizeWidget build({Widget? title}) {
     return AppBar(
+      automaticallyImplyLeading: false,
       title: title,
       centerTitle: true,
       actions: [

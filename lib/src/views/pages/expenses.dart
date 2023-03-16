@@ -15,37 +15,34 @@ class _ExpensesViewState extends State<ExpensesView> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultPage(title: title, child: _body());
+    return DefaultPage(
+      title: title,
+      appBarTitle: Text(title, style: TextStyle(color: Colors.white)),
+      floatingAction: FloatingActionButton(
+        onPressed: () => Get.dialog(const ExpanseManager()),
+        child: const Icon(Icons.add, color: Colors.white),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: _body(),
+      ),
+    );
   }
 
   Widget _body() {
-    return Column(
-      children: [
-        Expanded(
-            child: AppBlocBuilder<List<Expanses?>>(
-                bloc: expansesControl.bloc, child: dataList)),
-        FloatingActionButton(
-          onPressed: () {
-            Get.dialog(const ExpanseManager());
-          },
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-        ),
-        SizedBox(
-          height: Get.height * 0.1,
-        )
-      ],
+    return AppBlocBuilder<List<Expanses?>>(
+      bloc: expansesControl.bloc,
+      child: dataList,
     );
   }
 
   Widget dataList(List<Expanses?>? data) {
     if (data?.isEmpty ?? true) {
-      return const NotFoundWarning(message: 'Nenhuma despesa cadastrada\nno momento',);
+      return const NotFoundWarning(
+        message: 'Nenhuma despesa cadastrada\nno momento',
+      );
     }
-    return ListView.separated(
-      separatorBuilder: (context, _) => const Divider(),
+    return ListView.builder(
       itemCount: data!.length,
       itemBuilder: (context, int i) {
         final item = data[i];
@@ -74,7 +71,8 @@ class _ExpensesViewState extends State<ExpensesView> {
               }
             },
           ),
-          subtitle: Text('${Functions(number: item?.value).getMoney()}\n${Functions(date: item?.createdAt).formatDate}'),
+          subtitle: Text(
+              '${Functions(number: item?.value).getMoney()}\n${Functions(date: item?.createdAt).formatDate}'),
         );
       },
     );
@@ -85,30 +83,32 @@ class _ExpensesViewState extends State<ExpensesView> {
     expansesControl.load();
     super.initState();
   }
-  
+
   void onEdit({Expanses? data}) {
     Get.dialog(ExpanseManager(isEdit: true, value: data));
   }
-  
+
   void onDel({Expanses? value}) {
     Get.dialog(
-      AlertDialog(
-        title: const Text('Atenção!'),
-        content: const Text('Confirma a exclusão dos dados?'),
-        actions: [
-          LoadingButton(label: const Text('Sim'), process: () async {
-            final req = await expansesControl.delete(data: value);
-            if (!req.result) {
-              Get.defaultDialog(middleText: req.message, title: 'Atenção');
-            } else {
-              Get.back();
-              expansesControl.load();
-            }
-          }),
-          TextButton(onPressed: () => Get.back(), child: const Text('Não'))
-        ],
-      ),
-      barrierDismissible: false
-    );
+        AlertDialog(
+          title: const Text('Atenção!'),
+          content: const Text('Confirma a exclusão dos dados?'),
+          actions: [
+            LoadingButton(
+                label: const Text('Sim'),
+                process: () async {
+                  final req = await expansesControl.delete(data: value);
+                  if (!req.result) {
+                    Get.defaultDialog(
+                        middleText: req.message, title: 'Atenção');
+                  } else {
+                    Get.back();
+                    expansesControl.load();
+                  }
+                }),
+            TextButton(onPressed: () => Get.back(), child: const Text('Não'))
+          ],
+        ),
+        barrierDismissible: false);
   }
 }

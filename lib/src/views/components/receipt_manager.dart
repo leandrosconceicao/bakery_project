@@ -65,9 +65,6 @@ class _ReceiptManagerState extends State<ReceiptManager> {
                 ),
               ),
             ),
-            SizedBox(
-              height: Get.height * 0.09,
-            )
           ],
         ),
       ),

@@ -14,6 +14,7 @@ class _ReceiptPageState extends State<ReceiptPage>
     with SingleTickerProviderStateMixin {
   late final TabController tab;
   final title = 'Receitas';
+  final activeIndex = 0.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +22,13 @@ class _ReceiptPageState extends State<ReceiptPage>
       onRefresh: () => ReceiptsController.load(clearValues: false),
       child: DefaultPage(
         title: title,
-        appBarTitle: Text(title),
-        // floatingAction: FloatingActionButton(
-        //   onPressed: () => manageItem(),
-        //   child: const Icon(Icons.add),
-        // ),
+        appBarTitle: Text(title, style: TextStyle(color: Colors.white)),
+        floatingAction: Obx(
+          () => activeIndex.value != 0 ? const SizedBox() : FloatingActionButton(
+            onPressed: () => changeIndex(1),
+            child: const Icon(Icons.add, color: Colors.white,),
+          ),
+        ),
         child: _body(),
       ),
     );
@@ -36,23 +39,8 @@ class _ReceiptPageState extends State<ReceiptPage>
         controller: tab,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          Column(
-            children: [
-              Expanded(
-                  child: AppBlocBuilder<List<Receipts?>>(
-                      bloc: ReceiptsController.bloc, child: itemsList)),
-              FloatingActionButton(
-                onPressed: () => changeIndex(1),
-                child: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-              ),
-              SizedBox(
-                height: Get.height * 0.1,
-              ),
-            ],
-          ),
+          AppBlocBuilder<List<Receipts?>>(
+              bloc: ReceiptsController.bloc, child: itemsList),
           ReceiptManager(
             tabController: tab,
           )
@@ -109,12 +97,17 @@ class _ReceiptPageState extends State<ReceiptPage>
               padding: const EdgeInsets.all(8.0),
               child: ExpansionTile(
                 title: const Text('Ingredientes'),
-                children: item?.ingredients?.map((e) => ListTile(
-                  leading: const Icon(Icons.label),
-                  title: Text(e?.name ?? ''),
-                  subtitle: Text('${Functions(number: e?.cost).getMoney()}'),
-                  trailing: Text('${e?.quantityInPackage} ${e?.unitOfMeasurement}'),
-                )).toList() ?? [],
+                children: item?.ingredients
+                        ?.map((e) => ListTile(
+                              leading: const Icon(Icons.label),
+                              title: Text(e?.name ?? ''),
+                              subtitle: Text(
+                                  '${Functions(number: e?.cost).getMoney()}'),
+                              trailing: Text(
+                                  '${e?.quantityInPackage} ${e?.unitOfMeasurement}'),
+                            ))
+                        .toList() ??
+                    [],
               ),
             )
           ],
@@ -206,6 +199,9 @@ class _ReceiptPageState extends State<ReceiptPage>
         milliseconds: 500,
       ),
     );
+    tab.addListener(() {
+      activeIndex.value = tab.index;
+    });
     ReceiptsController.load();
     super.initState();
   }
