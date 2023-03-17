@@ -9,12 +9,14 @@ class SigninPage extends StatelessWidget {
   final btnFocus = FocusNode();
   final title = 'Faça seu login';
 
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return DefaultPage(
       title: title,
       hideAppBar: true,
-      appBarTitle: Text(title, style: TextStyle(color: Colors.white)),
+      appBarTitle: Text(title, style: Get.textTheme.headlineSmall),
       child: _body(),
     );
   }
@@ -23,7 +25,7 @@ class SigninPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Form(
-        key: authForm.formKey,
+        key: formKey,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +75,7 @@ class SigninPage extends StatelessWidget {
   }
 
   Future<void> auth() async {
-    if (authForm.formKey.currentState?.validate() ?? false) {
+    if (formKey.currentState?.validate() ?? false) {
       final req = await AuthController.check();
       if (!req.result) {
         Get.defaultDialog(middleText: req.message);

@@ -14,7 +14,7 @@ export '../src/views/components/receipt_manager.dart';
 export '../src/views/components/expanse_manager.dart';
 export 'package:flutter/cupertino.dart' show CupertinoIcons;
 export '../src/views/pages/configs.dart';
-export '../src/views/pages/expenses.dart';
+export '../src/views/pages/expanses.dart';
 export '../src/views/pages/home.dart';
 export '../src/views/pages/ingredients.dart';
 export '../src/views/pages/receipt.dart';

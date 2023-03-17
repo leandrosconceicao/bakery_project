@@ -4,5 +4,5 @@ class Routes {
   static const signin = '/sign_in';
   static const ingredients = '/ingredients';
   static const receipt = '/receipt';
-  static const expenses = '/expenses';
+  static const expenses = '/expanses';
 }

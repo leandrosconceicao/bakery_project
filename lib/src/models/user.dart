@@ -39,7 +39,7 @@ class User {
     data['email'] = email;
     data['establishments'] = establishments;
     data['group_user'] = groupUser;
-    data['pass'] = pass;
+    // data['pass'] = pass;
     data['username'] = nome;
     return data;
   }

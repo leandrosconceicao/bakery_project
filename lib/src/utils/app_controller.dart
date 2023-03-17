@@ -1,3 +1,4 @@
+import '../../libraries/utils.dart';
 import '/libraries/models.dart';
 
 import '/libraries/views.dart';
@@ -20,6 +21,7 @@ class AppController extends GetxController {
   void clearData() {
     defaultConfig.value = null;
     loggedUser.value = null;
+    authForm.clearSession();
   }
 
   void setRoute(String route) {

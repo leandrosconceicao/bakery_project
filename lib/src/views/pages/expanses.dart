@@ -17,7 +17,7 @@ class _ExpensesViewState extends State<ExpensesView> {
   Widget build(BuildContext context) {
     return DefaultPage(
       title: title,
-      appBarTitle: Text(title, style: TextStyle(color: Colors.white)),
+      appBarTitle: Text(title, style: Get.textTheme.headlineSmall),
       floatingAction: FloatingActionButton(
         onPressed: () => Get.dialog(const ExpanseManager()),
         child: const Icon(Icons.add, color: Colors.white),

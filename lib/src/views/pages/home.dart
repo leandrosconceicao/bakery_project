@@ -11,7 +11,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultPage(
       title: 'Home',
-      appBarTitle: const Text('Home'),
+      appBarTitle: const Text('Home', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
       child: _body(),
     );
   }

@@ -32,7 +32,7 @@ class _ConfigState extends State<Config> {
     const title = 'Configurações';
     return DefaultPage(
       title: title,
-      appBarTitle: const Text(title),
+      appBarTitle: Text(title, style: Get.textTheme.headlineSmall,),
       child: Center(child: _body()),
     );
   }

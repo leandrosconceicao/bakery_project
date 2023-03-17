@@ -15,7 +15,7 @@ class IngredientsPage extends StatelessWidget {
     IngredientsController.load();
     return DefaultPage(
       title: title,
-      appBarTitle: Text(title, style: TextStyle(color: Colors.white)),
+      appBarTitle: Text(title, style: Get.textTheme.headlineSmall),
       floatingAction: FloatingActionButton(
         onPressed: () => manageItem(),
         child: const Icon(

@@ -1,7 +1,9 @@
 import 'libraries/views.dart';
 import 'libraries/utils.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   runApp(const MyApp());
 }
 

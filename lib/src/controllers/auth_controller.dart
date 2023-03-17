@@ -15,6 +15,7 @@ class AuthController {
     if (req.result) {
       app.loggedUser.value = req.data;
       app.storeCode = app.loggedUser.value?.ests!.firstOrNull?.stores?.firstOrNull?.id;
+      authForm.saveSession();
     }
     return req;
   }

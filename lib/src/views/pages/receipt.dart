@@ -22,7 +22,7 @@ class _ReceiptPageState extends State<ReceiptPage>
       onRefresh: () => ReceiptsController.load(clearValues: false),
       child: DefaultPage(
         title: title,
-        appBarTitle: Text(title, style: TextStyle(color: Colors.white)),
+        appBarTitle: Text(title, style: Get.textTheme.headlineSmall),
         floatingAction: Obx(
           () => activeIndex.value != 0 ? const SizedBox() : FloatingActionButton(
             onPressed: () => changeIndex(1),

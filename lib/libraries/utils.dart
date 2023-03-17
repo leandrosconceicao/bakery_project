@@ -16,3 +16,4 @@ export '../src/utils/functions/functions.dart';
 export 'package:collection/collection.dart';
 export 'package:money2/money2.dart';
 export 'package:flutter_masked_text2/flutter_masked_text2.dart';
+export 'package:get_storage/get_storage.dart';
